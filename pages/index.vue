@@ -4,7 +4,7 @@
         <!-- <CardComponent v-for="article in data?.articles" :key="article.url" :data="article" /> -->
 
         <!-- store 사용 -->
-        <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" />
+        <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" :logo="logo" />
     </div>
 </template>
 
@@ -26,6 +26,8 @@ import CardComponent from "./components/CardComponent.vue";
 import { useStore } from "~/stores/api";
 
 const store = useStore();
+const { logo } = storeToRefs(store);
+
 await useAsyncData("getNews", () => store.getNews());
 </script>
 

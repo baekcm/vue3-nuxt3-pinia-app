@@ -40,17 +40,25 @@ interface Props {
     data :Article
 }
 
-const props = defineProps<Props>();
+interface PropsPlus extends Props {
+    logo :string
+}
+
+const props = defineProps<PropsPlus>();
 const { data } = toRefs(props);
 
-const url = data.value.url;
-const website = computed( () => {
-    return url.split("https://").pop()?.split("/")[0];
-} );
+//--- 아래 computed 는 store file getters 로 옮겼음.
+// const url = data.value.url;
 
-const logo = computed( () => {
-    return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${ website.value }&size=16`
-} );
+//--- computed : 계산된 형태를 만들고, 캐싱 기능이 있으며, 반드시 return 을 해줘야 한다.
+//--- computed 속성의 값을 사용 시 .value 를 사용해야 한다.
+// const website = computed( () => {
+//     return url.split("https://").pop()?.split("/")[0];
+// } );
+
+// const logo = computed( () => {
+//     return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${ website.value }&size=16`
+// } );
 
 const openSite = () => {
     window.open(data.value.url, "_blank");
