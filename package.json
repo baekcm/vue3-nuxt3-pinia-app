@@ -1,0 +1,26 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.11.0",
+    "axios": "^1.9.0",
+    "dayjs": "^1.11.13",
+    "nuxt": "^3.17.4",
+    "pinia": "^3.0.2",
+    "sass": "^1.32.0",
+    "vue": "^3.5.15",
+    "vue-router": "^4.5.1",
+    "vue3-spinners": "^1.2.2"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.89.1"
+  }
+}
