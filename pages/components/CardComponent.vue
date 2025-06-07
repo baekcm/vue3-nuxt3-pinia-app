@@ -32,33 +32,28 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from "dayjs";
 import type { Article } from '~/types/api';
+import dayjs from "dayjs";
 
 //--- index.vue 파일에서 props 로 전달해주는 이름 :data 와 동일해야 한다.
 interface Props {
     data :Article
 }
 
-interface PropsPlus extends Props {
-    logo :string
-}
-
-const props = defineProps<PropsPlus>();
+const props = defineProps<Props>();
 const { data } = toRefs(props);
 
-//--- 아래 computed 는 store file getters 로 옮겼음.
-// const url = data.value.url;
+const url = data.value.url;
 
 //--- computed : 계산된 형태를 만들고, 캐싱 기능이 있으며, 반드시 return 을 해줘야 한다.
 //--- computed 속성의 값을 사용 시 .value 를 사용해야 한다.
-// const website = computed( () => {
-//     return url.split("https://").pop()?.split("/")[0];
-// } );
+const website = computed( () => {
+    return url.split("https://").pop()?.split("/")[0];
+} );
 
-// const logo = computed( () => {
-//     return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${ website.value }&size=16`
-// } );
+const logo = computed( () => {
+    return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${ website.value }&size=16`
+} );
 
 const openSite = () => {
     window.open(data.value.url, "_blank");

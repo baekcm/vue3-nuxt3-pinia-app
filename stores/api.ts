@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import dayjs from "dayjs";
 import type { Article } from "~/types/api";
 import { useRuntimeConfig } from '#app';
 
 export const useStore = defineStore("store", () => {
     // State
-    const searchValue = ref<string>("korea");
+    const searchValue = ref<string>("general");
     const articleList = ref<Article[]>([]);
     const category = ref<string>("");
 
@@ -15,23 +16,14 @@ export const useStore = defineStore("store", () => {
     };
 
     // getters
-    //--- CardComponent.vue file 의 computed 를 제거하고, store getters 에 생성
-    const website = computed( () => {
-        return articleList.value.map((article) => {
-            article.url.split("https://").pop()?.split("/")[0];
-        })
-    });
-
-    const logo = computed( () => {
-        return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${ website.value }&size=16`
-    } );
 
     // Actions
     const getNews = async () => {
         //--- .env file 에 API KEY 값을 저장 후 store 에서 해당 파일을 읽어서 사용
         const apiKey = useRuntimeConfig().public.api_key;
 
-        const API_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category.value}&apiKey=${apiKey}`;
+        // const API_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${searchValue.value}&apiKey=${apiKey}`;
+        const API_URL = `https://newsapi.org/v2/everything?q=${searchValue.value}&from=2025-06-01&sortBy=popularity&apiKey=${apiKey}`;
 
         try {
             articleList.value = await axios.get(API_URL).then((res) => {
@@ -42,5 +34,5 @@ export const useStore = defineStore("store", () => {
         }
     };
 
-    return { searchValue, category, articleList, changeSearchValue, logo, getNews };
+    return { searchValue, category, articleList, changeSearchValue, getNews };
 });

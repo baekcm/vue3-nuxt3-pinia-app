@@ -4,7 +4,7 @@
             <VueSpinnerFacebook size="40" />
         </div>
         <div v-else class="page">
-            <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" :logo="logo" />
+            <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" />
         </div>
     </ClientOnly>
 </template>
@@ -17,10 +17,8 @@ import { VueSpinnerFacebook } from "vue3-spinners";
 const route = useRoute();
 const store = useStore();
 
-const { logo } = storeToRefs(store);
-
 //--- store state 값을 변경.
-store.$patch( state => { state.category = route.params.id })
+// store.$patch( state => { state.category = route.params.id })
 const { pending } = await useAsyncData("getNews", () => store.getNews());
 
 onMounted(() => {

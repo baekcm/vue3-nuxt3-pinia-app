@@ -2,9 +2,8 @@
     <div class="page">
         <!-- store 사용하지 않고, 해당 페이지에서 사용할 때 -->
         <!-- <CardComponent v-for="article in data?.articles" :key="article.url" :data="article" /> -->
-
         <!-- store 사용 -->
-        <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" :logo="logo" />
+        <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" />
     </div>
 </template>
 
@@ -26,7 +25,6 @@ import CardComponent from "./components/CardComponent.vue";
 import { useStore } from "~/stores/api";
 
 const store = useStore();
-const { logo } = storeToRefs(store);
 
 await useAsyncData("getNews", () => store.getNews());
 </script>
