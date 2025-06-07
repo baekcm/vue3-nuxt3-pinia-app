@@ -23,7 +23,6 @@
 
 //--- store 활용하는 경우
 import CardComponent from "./components/CardComponent.vue";
-import { useStore } from "~/stores/api";
 
 const store = useStore();
 

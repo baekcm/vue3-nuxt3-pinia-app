@@ -6,9 +6,9 @@ import { useRuntimeConfig } from '#app';
 
 export const useStore = defineStore("store", () => {
     // State
-    const searchValue = ref<string>("korea");
+    const searchValue = ref<string>("general");
     const articleList = ref<Article[]>([]);
-    const category = ref<string>("");
+    const category = ref<string>("general");
 
     // Mutations
     const changeSearchValue = (payload: string) => {
