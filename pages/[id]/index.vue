@@ -11,19 +11,14 @@
 
 <script setup lang="ts">
 import CardComponent from ".././components/CardComponent.vue";
-import { useStore } from "~/stores/api";
 import { VueSpinnerFacebook } from "vue3-spinners";
 
 const route = useRoute();
 const store = useStore();
 
 //--- store state 값을 변경.
-// store.$patch( state => { state.category = route.params.id })
+store.$patch( state => { state.category = route.params.id })
 const { pending } = await useAsyncData("getNews", () => store.getNews());
-
-onMounted(() => {
-    store.changeSearchValue(String(route.params.id));
-});
 </script>
 
 <style lang="scss" scoped>

@@ -6,7 +6,7 @@ import { useRuntimeConfig } from '#app';
 
 export const useStore = defineStore("store", () => {
     // State
-    const searchValue = ref<string>("general");
+    const searchValue = ref<string>("korea");
     const articleList = ref<Article[]>([]);
     const category = ref<string>("");
 
@@ -22,8 +22,7 @@ export const useStore = defineStore("store", () => {
         //--- .env file 에 API KEY 값을 저장 후 store 에서 해당 파일을 읽어서 사용
         const apiKey = useRuntimeConfig().public.api_key;
 
-        // const API_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${searchValue.value}&apiKey=${apiKey}`;
-        const API_URL = `https://newsapi.org/v2/everything?q=${searchValue.value}&from=2025-06-01&sortBy=popularity&apiKey=${apiKey}`;
+        const API_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category.value}&apiKey=${apiKey}`;
 
         try {
             articleList.value = await axios.get(API_URL).then((res) => {

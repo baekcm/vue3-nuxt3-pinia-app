@@ -2,6 +2,7 @@
     <div class="page">
         <!-- store 사용하지 않고, 해당 페이지에서 사용할 때 -->
         <!-- <CardComponent v-for="article in data?.articles" :key="article.url" :data="article" /> -->
+
         <!-- store 사용 -->
         <CardComponent v-for="article in store.articleList" :key="article.url" :data="article" />
     </div>

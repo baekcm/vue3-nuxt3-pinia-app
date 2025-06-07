@@ -32,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Article } from '~/types/api';
 import dayjs from "dayjs";
+import type { Article } from '~/types/api';
 
 //--- index.vue 파일에서 props 로 전달해주는 이름 :data 와 동일해야 한다.
 interface Props {
